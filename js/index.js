@@ -8,10 +8,46 @@ At the end of the list of monsters, show a button. When clicked, the button shou
 
 document.addEventListener('DOMContentLoaded', (e) => {
     let currentPage = 1;
+
+    let lastMonsterId = currentPage * 50;
+
     createForm();
 
-    const monstersUrl = `http://localhost:3000/monsters/?_limit=50&_page=1`;
+    const monstersUrl = `http://localhost:3000/monsters/?_limit=5&_page=${currentPage}`;
+    
 
+
+    document.getElementById('forward').addEventListener('click', (e) => {
+        const currentLi = Array.from(document.getElementsByTagName('li'));
+        currentLi.forEach(li => {
+            li.remove();
+        })
+        e.preventDefault();
+  
+        currentPage++;
+ 
+        fetch(`http://localhost:3000/monsters/?_limit=5&_page=${currentPage}`)
+        .then(res => res.json())
+        .then(data => displayMonsterData(data))
+    })
+    document.getElementById('back').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage === 1){
+            currentPage = 1;
+
+            return alert('Nothing Back here')
+        }
+        const currentLi = Array.from(document.getElementsByTagName('li'));
+        currentLi.forEach(li => {
+            li.remove();
+        })
+        
+        currentPage--;
+        
+        fetch(`http://localhost:3000/monsters/?_limit=5&_page=${currentPage}`)
+        .then(res => res.json())
+        .then(data => displayMonsterData(data))
+    })
     fetch(monstersUrl)
     .then(res => res.json())
     .then(data => displayMonsterData(data))
@@ -55,6 +91,7 @@ function displayMonsterData(data){
     const createUl = document.createElement('ul');
     monstersDiv.appendChild(createUl);
 
+    
     for (let i = 0; data.length > i; i++){
 
         const monsterAge = data[i].age;
