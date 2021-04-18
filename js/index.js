@@ -8,6 +8,7 @@ At the end of the list of monsters, show a button. When clicked, the button shou
 
 document.addEventListener('DOMContentLoaded', (e) => {
     let currentPage = 1;
+    createForm();
 
     const monstersUrl = `http://localhost:3000/monsters/?_limit=50&_page=1`;
 
@@ -16,6 +17,22 @@ document.addEventListener('DOMContentLoaded', (e) => {
     .then(data => displayMonsterData(data))
 })
 
+function createForm(){
+    const createMonsterDiv = document.getElementById('create-monster');
+    createMonsterDiv.innerHTML = `
+    <form>
+        <input id="monsterName" type="text" placeholder="Name">
+        <input id="monsterAge" type="number" placeholder="Age">
+        <input id="monsterDes" type="text" placeholder="Description">
+        <button id="submit">Create Monster</button>
+    </form>`
+
+    document.getElementById('submit').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        
+    })
+}
 function displayMonsterData(data){
     const monstersDiv = document.getElementById('monster-container');
     const createUl = document.createElement('ul');
