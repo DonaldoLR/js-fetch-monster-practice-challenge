@@ -6005,18 +6005,6 @@
       "age": 13,
       "description": "131313",
       "id": 1001
-    },
-    {
-      "name": "Make",
-      "age": 19,
-      "description": "Wow",
-      "id": 1002
-    },
-    {
-      "name": "Make",
-      "age": 19,
-      "description": "Wow",
-      "id": 1003
     }
   ]
 }

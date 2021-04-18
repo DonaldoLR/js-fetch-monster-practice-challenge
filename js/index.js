@@ -30,7 +30,24 @@ function createForm(){
     document.getElementById('submit').addEventListener('click', (e) => {
         e.preventDefault();
 
+        const newMonsterName = document.getElementById('monsterName').value;
+        const newMonsterAge = document.getElementById('monsterAge').value;
+        const newMonsterDes = document.getElementById('monsterDes').value;
         
+        const formData = {
+            name: newMonsterName, 
+            age: newMonsterAge, 
+            description: newMonsterDes
+        }
+        
+        fetch('http://localhost:3000/monsters', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
     })
 }
 function displayMonsterData(data){
